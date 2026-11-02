@@ -179,8 +179,8 @@ footer a{color:var(--accent2)}
    Supabase -> Project Settings -> API
    (খালি রাখলেও সাইট চলবে, শুধু কমিউনিটি/স্ট্যাটস বন্ধ থাকবে)
    ===================================================== */
-const SUPABASE_URL = "YOUR_SUPABASE_URL";
-const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+const SUPABASE_URL = "https://mmakbbihtwzvxyfzoefq.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1tYWtiYmlodHd6dnh5ZnpvZWZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM2MzMxNzAsImV4cCI6MjEwOTIwOTE3MH0.hFw97Rm9f_UIedloaIF2R9oYi-xzp6wn0A_LPJaKhd4";
 
 const sb = (window.supabase && !SUPABASE_URL.startsWith("YOUR_") && !SUPABASE_ANON_KEY.startsWith("YOUR_"))
   ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
