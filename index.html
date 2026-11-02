@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>স্টাইলিশ নেম জেনারেটর - ফ্রি ফায়ার ও পাবজি</title>
+<meta name="description" content="ফ্রি ফায়ার ও পাবজির জন্য ফ্রিতে স্টাইলিশ নিকনেম বানান। ফ্যান্সি ফন্ট, সিম্বল, গিল্ড ট্যাগ ও র‍্যান্ডম গেমার নাম — এক ক্লিকে কপি করুন।">
+<meta name="theme-color" content="#0b0f1a">
+<meta property="og:title" content="স্টাইলিশ নেম জেনারেটর - ফ্রি ফায়ার ও পাবজি">
+<meta property="og:description" content="ফ্রিতে ফ্যান্সি গেমিং নিকনেম বানান ও কপি করুন।">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0f1a; --card:#141a2b; --card2:#1b2338; --line:#26304a;
+  --text:#e8ecf7; --muted:#8f9bb8; --accent:#ff7a1a; --accent2:#ffb347; --ok:#27c47d; --danger:#ff4d5e;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--text);font-family:"Hind Siliguri",system-ui,sans-serif;line-height:1.5}
+body{background:radial-gradient(1200px 500px at 50% -100px,#2a1708 0,transparent 60%),var(--bg);min-height:100vh}
+.wrap{max-width:760px;margin:0 auto;padding:16px 16px 80px}
+header{text-align:center;padding:20px 0 8px}
+header h1{margin:0;font-size:28px;letter-spacing:.2px}
+header h1 span{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+header p{margin:6px 0 0;color:var(--muted);font-size:15px}
+.tabs{display:flex;gap:6px;margin:18px 0 14px;background:var(--card);padding:5px;border-radius:14px;border:1px solid var(--line);overflow-x:auto}
+.tab{flex:1;min-width:max-content;border:0;background:transparent;color:var(--muted);font:inherit;font-weight:600;padding:9px 12px;border-radius:10px;cursor:pointer;white-space:nowrap}
+.tab.active{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#1a0d00}
+section.panel{display:none}
+section.panel.active{display:block}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px}
+label.l{display:block;font-size:13px;color:var(--muted);margin:0 0 6px}
+input[type=text],select{width:100%;background:var(--card2);border:1px solid var(--line);color:var(--text);font:inherit;font-size:17px;padding:12px 14px;border-radius:12px;outline:none}
+input[type=text]:focus,select:focus{border-color:var(--accent)}
+.row{display:flex;gap:10px}
+.row>*{flex:1}
+.counter{font-size:12px;color:var(--muted);text-align:right;margin-top:4px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{border:1px solid var(--line);background:var(--card2);color:var(--text);font:inherit;font-size:14px;padding:6px 11px;border-radius:999px;cursor:pointer}
+.chip.active{background:var(--accent);border-color:var(--accent);color:#1a0d00;font-weight:600}
+.btn{border:0;font:inherit;font-weight:600;cursor:pointer;border-radius:12px;padding:11px 16px;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#1a0d00}
+.btn.sec{background:var(--card2);color:var(--text);border:1px solid var(--line)}
+.btn.sm{padding:7px 12px;font-size:14px;border-radius:10px}
+.btn:active{transform:scale(.97)}
+.item{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:11px 12px;margin-bottom:8px}
+.item .txt{flex:1;min-width:0}
+.item .out{font-size:19px;word-break:break-word;font-family:system-ui,"Segoe UI Symbol","Noto Sans Symbols","Noto Sans Symbols 2",sans-serif}
+.item .meta{font-size:12px;color:var(--muted);margin-top:2px}
+.badge{display:inline-block;background:#3a1d08;color:var(--accent2);border-radius:999px;padding:0 8px;font-size:11px;margin-left:6px}
+.icon{border:1px solid var(--line);background:var(--card2);color:var(--text);width:38px;height:38px;border-radius:10px;cursor:pointer;font-size:17px;flex:none}
+.icon.on{color:var(--danger);border-color:var(--danger)}
+.empty{text-align:center;color:var(--muted);padding:26px 10px}
+.note{font-size:13px;color:var(--muted);background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:10px 12px;margin:10px 0}
+.h2{font-size:16px;font-weight:700;margin:14px 0 8px}
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(30px);background:#fff;color:#111;padding:10px 18px;border-radius:999px;font-weight:600;opacity:0;pointer-events:none;transition:.25s;z-index:50;max-width:90vw;text-align:center}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+footer{margin-top:30px;text-align:center;color:var(--muted);font-size:12.5px}
+footer a{color:var(--accent2)}
+.hide{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>🔥 <span>স্টাইলিশ নেম জেনারেটর</span></h1>
+  <p>ফ্রি ফায়ার ও পাবজির জন্য ফ্যান্সি নিকনেম — ফ্রি, এক ক্লিকে কপি</p>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button class="tab active" data-tab="gen">জেনারেটর</button>
+  <button class="tab" data-tab="rand">র‍্যান্ডম নাম</button>
+  <button class="tab" data-tab="comm">কমিউনিটি</button>
+  <button class="tab" data-tab="fav">সেভ করা <span id="favCount"></span></button>
+</nav>
+
+<!-- ================= জেনারেটর ================= -->
+<section class="panel active" id="p-gen">
+  <div class="box">
+    <label class="l" for="nameInput">আপনার নাম লিখুন (ইংরেজিতে)</label>
+    <input type="text" id="nameInput" maxlength="30" placeholder="যেমন: Sakib" autocomplete="off" autocapitalize="off" spellcheck="false">
+    <div class="counter"><span id="lenInfo">0</span> অক্ষর</div>
+    <div class="row" style="margin-top:10px">
+      <div>
+        <label class="l" for="tagInput">গিল্ড ট্যাগ (ঐচ্ছিক)</label>
+        <input type="text" id="tagInput" maxlength="6" placeholder="যেমন: BD" autocomplete="off" autocapitalize="off" spellcheck="false">
+      </div>
+      <div>
+        <label class="l" for="gameSel">গেম</label>
+        <select id="gameSel">
+          <option value="freefire">ফ্রি ফায়ার</option>
+          <option value="pubg">পাবজি</option>
+          <option value="other">অন্য</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="box">
+    <label class="l">ডেকোরেশন বেছে নিন</label>
+    <div class="chips" id="decoChips"></div>
+  </div>
+
+  <div class="note">⚠️ কিছু সিম্বল সব গেমে বা সব ফোনে নাও চলতে পারে। গেমে নাম বসানোর সময় যেটা গ্রহণ করে সেটাই ব্যবহার করুন। অক্ষরসীমাও গেমভেদে আলাদা হতে পারে।</div>
+
+  <div class="h2">🔥 আপনার স্টাইলগুলো</div>
+  <div id="results"></div>
+</section>
+
+<!-- ================= র‍্যান্ডম ================= -->
+<section class="panel" id="p-rand">
+  <div class="box">
+    <label class="l">কেমন নাম চান?</label>
+    <div class="chips" id="randMode"></div>
+    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn" id="randBtn">🎲 নতুন নাম বানান</button>
+    </div>
+  </div>
+  <div id="randResults"></div>
+</section>
+
+<!-- ================= কমিউনিটি ================= -->
+<section class="panel" id="p-comm">
+  <div class="box">
+    <div class="h2" style="margin-top:0">✍️ আপনার নাম জমা দিন</div>
+    <label class="l" for="subName">নাম (স্টাইলসহ)</label>
+    <input type="text" id="subName" maxlength="60" placeholder="জেনারেটর থেকে কপি করে এখানে পেস্ট করুন" autocomplete="off">
+    <div class="row" style="margin-top:10px;align-items:end">
+      <div>
+        <label class="l" for="subGame">গেম</label>
+        <select id="subGame">
+          <option value="freefire">ফ্রি ফায়ার</option>
+          <option value="pubg">পাবজি</option>
+          <option value="other">অন্য</option>
+        </select>
+      </div>
+      <div><button class="btn" id="subBtn" style="width:100%">জমা দিন</button></div>
+    </div>
+    <div class="note" style="margin-bottom:0">লিংক, নাম্বার বা ইমেইল দেওয়া যাবে না। অনুমোদনের পর নামটি সবার জন্য দেখা যাবে।</div>
+  </div>
+  <div class="row" style="margin-bottom:10px">
+    <select id="commFilter">
+      <option value="all">সব গেম</option>
+      <option value="freefire">ফ্রি ফায়ার</option>
+      <option value="pubg">পাবজি</option>
+      <option value="other">অন্য</option>
+    </select>
+    <select id="commSort">
+      <option value="likes">সবচেয়ে পছন্দের</option>
+      <option value="new">নতুন</option>
+    </select>
+  </div>
+  <div id="commList"></div>
+</section>
+
+<!-- ================= সেভ করা ================= -->
+<section class="panel" id="p-fav">
+  <div id="favList"></div>
+  <div style="margin-top:10px" id="favClearWrap" class="hide">
+    <button class="btn sec sm" id="favClear">সব মুছে ফেলুন</button>
+  </div>
+</section>
+
+<footer>
+  <p>এই সাইট Garena, Krafton বা PUBG-এর সাথে সম্পর্কিত নয়। Free Fire ও PUBG তাদের নিজ নিজ মালিকের ট্রেডমার্ক।</p>
+  <p>এখানে কোনো ডায়মন্ড/UC জেনারেটর নেই এবং কখনো থাকবে না। আপনার কোনো অ্যাকাউন্ট তথ্য আমরা চাই না।</p>
+  <p>নাম জেনারেট হয় আপনার ব্রাউজারেই; শুধু কমিউনিটিতে জমা দিলে নামটি সংরক্ষণ হয়।</p>
+</footer>
+</div>
+
+<div id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* =====================================================
+   ★ একমাত্র যেটা আপনাকে বসাতে হবে: Supabase URL ও anon key
+   Supabase -> Project Settings -> API
+   (খালি রাখলেও সাইট চলবে, শুধু কমিউনিটি/স্ট্যাটস বন্ধ থাকবে)
+   ===================================================== */
+const SUPABASE_URL = "YOUR_SUPABASE_URL";
+const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+
+const sb = (window.supabase && !SUPABASE_URL.startsWith("YOUR_") && !SUPABASE_ANON_KEY.startsWith("YOUR_"))
+  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+/* ---------------- হেল্পার ---------------- */
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+};
+let toastTimer;
+function toast(msg) {
+  const t = $("#toast"); t.textContent = msg; t.classList.add("show");
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 1800);
+}
+async function copyText(text) {
+  try { await navigator.clipboard.writeText(text); return true; }
+  catch {
+    try {
+      const ta = document.createElement("textarea");
+      ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+      document.body.appendChild(ta); ta.select();
+      const ok = document.execCommand("copy"); ta.remove(); return ok;
+    } catch { return false; }
+  }
+}
+const toBn = n => String(n).replace(/\d/g, d => "০১২৩৪৫৬৭৮৯"[d]);
+
+/* ---------------- ইউনিকোড স্টাইল ---------------- */
+function mapper({ U, L, D, exc = {}, upperOnly = false, digitsFn }) {
+  return str => Array.from(upperOnly ? str.toUpperCase() : str).map(ch => {
+    if (exc[ch]) return exc[ch];
+    const c = ch.codePointAt(0);
+    if (c >= 65 && c <= 90 && U != null) return String.fromCodePoint(U + c - 65);
+    if (c >= 97 && c <= 122) {
+      if (L != null) return String.fromCodePoint(L + c - 97);
+      if (U != null) return String.fromCodePoint(U + c - 97);
+    }
+    if (c >= 48 && c <= 57) {
+      if (digitsFn) return digitsFn(c, ch);
+      if (D != null) return String.fromCodePoint(D + c - 48);
+    }
+    return ch;
+  }).join("");
+}
+const SMALL = {a:'ᴀ',b:'ʙ',c:'ᴄ',d:'ᴅ',e:'ᴇ',f:'ꜰ',g:'ɢ',h:'ʜ',i:'ɪ',j:'ᴊ',k:'ᴋ',l:'ʟ',m:'ᴍ',n:'ɴ',o:'ᴏ',p:'ᴘ',q:'ǫ',r:'ʀ',s:'ꜱ',t:'ᴛ',u:'ᴜ',v:'ᴠ',w:'ᴡ',x:'x',y:'ʏ',z:'ᴢ'};
+
+const STYLES = [
+  { key: "plain",     label: "সাধারণ",           fn: s => s },
+  { key: "bold",      label: "বোল্ড",             fn: mapper({ U: 0x1D400, L: 0x1D41A, D: 0x1D7CE }) },
+  { key: "italic",    label: "ইটালিক",            fn: mapper({ U: 0x1D434, L: 0x1D44E, exc: { h: "ℎ" } }) },
+  { key: "bolditalic",label: "বোল্ড ইটালিক",      fn: mapper({ U: 0x1D468, L: 0x1D482, D: 0x1D7CE }) },
+  { key: "script",    label: "স্ক্রিপ্ট",          fn: mapper({ U: 0x1D4D0, L: 0x1D4EA, D: 0x1D7CE }) },
+  { key: "fraktur",   label: "গথিক",              fn: mapper({ U: 0x1D56C, L: 0x1D586, D: 0x1D7CE }) },
+  { key: "double",    label: "ডাবল লাইন",         fn: mapper({ U: 0x1D538, L: 0x1D552, D: 0x1D7D8, exc: { C:"ℂ", H:"ℍ", N:"ℕ", P:"ℙ", Q:"ℚ", R:"ℝ", Z:"ℤ" } }) },
+  { key: "sans",      label: "সানস বোল্ড",        fn: mapper({ U: 0x1D5D4, L: 0x1D5EE, D: 0x1D7EC }) },
+  { key: "sansbi",    label: "সানস বোল্ড ইটালিক", fn: mapper({ U: 0x1D63C, L: 0x1D656, D: 0x1D7EC }) },
+  { key: "mono",      label: "মনোস্পেস",          fn: mapper({ U: 0x1D670, L: 0x1D68A, D: 0x1D7F6 }) },
+  { key: "circled",   label: "গোল বৃত্ত",         fn: mapper({ U: 0x24B6, L: 0x24D0, digitsFn: c => c === 48 ? "⓪" : String.fromCodePoint(0x2460 + c - 49) }) },
+  { key: "squared",   label: "বর্গাকার",           fn: mapper({ U: 0x1F130, upperOnly: true }) },
+  { key: "negsq",     label: "কালো বর্গ",          fn: mapper({ U: 0x1F170, upperOnly: true }) },
+  { key: "negcirc",   label: "কালো বৃত্ত",         fn: mapper({ U: 0x1F150, upperOnly: true }) },
+  { key: "fullwidth", label: "ফুল-উইডথ",          fn: mapper({ U: 0xFF21, L: 0xFF41, D: 0xFF10 }) },
+  { key: "smallcaps", label: "স্মল ক্যাপস",        fn: s => Array.from(s).map(c => SMALL[c.toLowerCase()] || c).join("") },
+];
+
+const DECOS = [
+  { id: "none", label: "কিছু না", tpl: "{n}" },
+  { id: "d1", label: "꧁ ꧂",    tpl: "꧁{n}꧂" },
+  { id: "d2", label: "『 』",    tpl: "『{n}』" },
+  { id: "d3", label: "【 】",    tpl: "【{n}】" },
+  { id: "d4", label: "༺ ༻",    tpl: "༺{n}༻" },
+  { id: "d5", label: "★彡 彡★", tpl: "★彡{n}彡★" },
+  { id: "d6", label: "⚡ ⚡",    tpl: "⚡{n}⚡" },
+  { id: "d7", label: "☠ ☠",    tpl: "☠{n}☠" },
+  { id: "d8", label: "♛ ♛",    tpl: "♛{n}♛" },
+  { id: "d9", label: "✦ ✦",    tpl: "✦{n}✦" },
+  { id: "d10", label: "「 」",   tpl: "「{n}」" },
+  { id: "d11", label: "乂 乂",   tpl: "乂{n}乂" },
+  { id: "d12", label: "𓆩 𓆪",   tpl: "𓆩{n}𓆪" },
+  { id: "d13", label: "ッ",     tpl: "{n}ッ" },
+  { id: "d14", label: "✔",     tpl: "{n}✔" },
+  { id: "d15", label: "ツ",     tpl: "{n}ツ" },
+  { id: "d16", label: "•ᴳᴼᴰ",  tpl: "{n}•ᴳᴼᴰ" },
+];
+
+/* ---------------- স্টেট ---------------- */
+let currentDeco = "none";
+let favs = store.get("sng_favs", []);
+let popular = {};       // style_key -> copies
+let randMode = "mix";
+
+/* ---------------- ট্যাব ---------------- */
+$$(".tab").forEach(b => b.addEventListener("click", () => {
+  $$(".tab").forEach(x => x.classList.toggle("active", x === b));
+  $$("section.panel").forEach(p => p.classList.toggle("active", p.id === "p-" + b.dataset.tab));
+  if (b.dataset.tab === "comm") loadCommunity();
+  if (b.dataset.tab === "fav") renderFavs();
+  if (b.dataset.tab === "rand" && !$("#randResults").children.length) renderRandom();
+}));
+
+/* ---------------- ডেকোরেশন চিপ ---------------- */
+function buildDecoChips() {
+  const box = $("#decoChips"); box.innerHTML = "";
+  DECOS.forEach(d => {
+    const b = document.createElement("button");
+    b.className = "chip" + (d.id === currentDeco ? " active" : "");
+    b.textContent = d.label;
+    b.addEventListener("click", () => { currentDeco = d.id; buildDecoChips(); renderResults(); });
+    box.appendChild(b);
+  });
+}
+
+/* ---------------- ফলাফল ---------------- */
+function decorate(styled, tag) {
+  const deco = DECOS.find(d => d.id === currentDeco) || DECOS[0];
+  let out = deco.tpl.replace("{n}", styled);
+  if (tag) out = tag + "•" + out;
+  return out;
+}
+function buildItem({ text, meta, key, badge }) {
+  const el = document.createElement("div"); el.className = "item";
+  const t = document.createElement("div"); t.className = "txt";
+  const o = document.createElement("div"); o.className = "out"; o.textContent = text;
+  const m = document.createElement("div"); m.className = "meta"; m.textContent = meta || "";
+  if (badge) { const bd = document.createElement("span"); bd.className = "badge"; bd.textContent = badge; m.appendChild(bd); }
+  t.append(o, m);
+
+  const fav = document.createElement("button");
+  fav.className = "icon" + (favs.includes(text) ? " on" : ""); fav.textContent = favs.includes(text) ? "♥" : "♡";
+  fav.title = "সেভ করুন";
+  fav.addEventListener("click", () => {
+    if (favs.includes(text)) { favs = favs.filter(x => x !== text); fav.classList.remove("on"); fav.textContent = "♡"; }
+    else { favs.unshift(text); favs = favs.slice(0, 100); fav.classList.add("on"); fav.textContent = "♥"; toast("সেভ হয়েছে ♥"); }
+    store.set("sng_favs", favs); updateFavCount();
+    if ($("#p-fav").classList.contains("active")) renderFavs();
+  });
+
+  const cp = document.createElement("button"); cp.className = "btn sm"; cp.textContent = "কপি";
+  cp.addEventListener("click", async () => {
+    const ok = await copyText(text);
+    toast(ok ? "কপি হয়েছে ✓" : "কপি করা যায়নি, হাতে সিলেক্ট করুন");
+    if (ok && key) trackCopy(key);
+  });
+  el.append(t, fav, cp);
+  return el;
+}
+function renderResults() {
+  const name = $("#nameInput").value.trim();
+  const tag = $("#tagInput").value.trim();
+  const box = $("#results"); box.innerHTML = "";
+  $("#lenInfo").textContent = toBn(Array.from(name).length);
+  if (!name) { box.innerHTML = '<div class="empty">উপরে আপনার নাম লিখুন, সব স্টাইল এখানে দেখা যাবে ✨</div>'; return; }
+  const top = Object.entries(popular).filter(([, c]) => c > 0).sort((a, b) => b[1] - a[1]).slice(0, 3).map(x => x[0]);
+  STYLES.forEach(s => {
+    const text = decorate(s.fn(name), tag);
+    box.appendChild(buildItem({
+      text, key: s.key,
+      meta: s.label + " • " + toBn(Array.from(text).length) + " অক্ষর",
+      badge: top.includes(s.key) ? "🔥 জনপ্রিয়" : ""
+    }));
+  });
+}
+$("#nameInput").addEventListener("input", renderResults);
+$("#tagInput").addEventListener("input", renderResults);
+
+/* ---------------- র‍্যান্ডম নাম ---------------- */
+const WORDS = {
+  A: ["Dark","Toxic","Sniper","Ghost","Alpha","Shadow","Killer","Savage","Rogue","Phantom","Dragon","Wolf","Raven","Blaze","Venom","Storm","Joker","Reaper","Titan","Ninja","Cobra","Viper","Falcon","Thunder","Inferno","Rebel"],
+  B: ["Gamer","YT","OP","Pro","King","Boss","X","Legend","Hunter","BD","Slayer","Master","Rider","Sniper","Beast","Wolf","Assassin","Warrior","Demon","Lord"],
+  BN: ["Sakib","Rafi","Tanvir","Rakib","Nayeem","Shuvo","Arif","Sabbir","Tamim","Emon","Riyad","Nafis","Mahi","Tonmoy","Fahim"]
+};
+const RAND_MODES = [
+  { id: "mix",   label: "মিক্স" },
+  { id: "cool",  label: "কুল ও ডার্ক" },
+  { id: "bd",    label: "দেশি স্টাইল" },
+  { id: "short", label: "ছোট নাম" },
+];
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const num = () => (Math.random() < .5 ? "" : String(Math.floor(Math.random() * 99) + 1));
+function genRandom() {
+  switch (randMode) {
+    case "cool":  return pick(WORDS.A) + pick(WORDS.A) + num();
+    case "bd":    return pick(WORDS.BN) + "_" + pick(WORDS.B) + num();
+    case "short": return pick(WORDS.A) + pick(["X","OP","YT","47","99","07"]);
+    default:      return Math.random() < .5 ? pick(WORDS.A) + "_" + pick(WORDS.B) + num() : pick(WORDS.A) + pick(WORDS.A) + num();
+  }
+}
+function buildRandChips() {
+  const box = $("#randMode"); box.innerHTML = "";
+  RAND_MODES.forEach(m => {
+    const b = document.createElement("button");
+    b.className = "chip" + (m.id === randMode ? " active" : ""); b.textContent = m.label;
+    b.addEventListener("click", () => { randMode = m.id; buildRandChips(); renderRandom(); });
+    box.appendChild(b);
+  });
+}
+function renderRandom() {
+  const box = $("#randResults"); box.innerHTML = "";
+  const seen = new Set();
+  while (seen.size < 10) seen.add(genRandom());
+  seen.forEach(n => {
+    const el = buildItem({ text: n, meta: "র‍্যান্ডম নাম" });
+    const use = document.createElement("button"); use.className = "btn sec sm"; use.textContent = "স্টাইল করুন";
+    use.addEventListener("click", () => {
+      $("#nameInput").value = n.replace(/_/g, ""); renderResults();
+      $$(".tab")[0].click(); window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+    el.appendChild(use); box.appendChild(el);
+  });
+}
+$("#randBtn").addEventListener("click", renderRandom);
+
+/* ---------------- সেভ করা ---------------- */
+function updateFavCount() { $("#favCount").textContent = favs.length ? "(" + toBn(favs.length) + ")" : ""; }
+function renderFavs() {
+  const box = $("#favList"); box.innerHTML = "";
+  $("#favClearWrap").classList.toggle("hide", !favs.length);
+  if (!favs.length) { box.innerHTML = '<div class="empty">এখনো কিছু সেভ করেননি। যেকোনো নামের পাশে ♡ চাপুন।</div>'; return; }
+  favs.forEach(t => box.appendChild(buildItem({ text: t, meta: "সেভ করা" })));
+}
+$("#favClear").addEventListener("click", () => {
+  if (confirm("সব সেভ করা নাম মুছে ফেলবেন?")) { favs = []; store.set("sng_favs", favs); updateFavCount(); renderFavs(); }
+});
+
+/* ---------------- Supabase: স্ট্যাটস ---------------- */
+async function loadPopular() {
+  if (!sb) return;
+  try {
+    const { data, error } = await sb.from("style_stats").select("style_key,copies");
+    if (error) throw error;
+    popular = Object.fromEntries(data.map(r => [r.style_key, Number(r.copies)]));
+    renderResults();
+  } catch (e) { console.warn("stats:", e.message); }
+}
+function trackCopy(key) {
+  if (!sb) return;
+  sb.rpc("increment_style", { p_key: key }).then(() => {}, () => {});
+  popular[key] = (popular[key] || 0) + 1;
+}
+
+/* ---------------- Supabase: কমিউনিটি ---------------- */
+const GAME_LABEL = { freefire: "ফ্রি ফায়ার", pubg: "পাবজি", other: "অন্য" };
+let liked = new Set(store.get("sng_liked", []));
+let reported = new Set(store.get("sng_reported", []));
+
+async function loadCommunity() {
+  const box = $("#commList");
+  if (!sb) { box.innerHTML = '<div class="empty">কমিউনিটি এখন চালু নেই।</div>'; return; }
+  box.innerHTML = '<div class="empty">লোড হচ্ছে…</div>';
+  try {
+    let q = sb.from("name_submissions").select("id,name,game,likes,created_at").limit(40);
+    const f = $("#commFilter").value; if (f !== "all") q = q.eq("game", f);
+    q = $("#commSort").value === "new" ? q.order("created_at", { ascending: false }) : q.order("likes", { ascending: false }).order("created_at", { ascending: false });
+    const { data, error } = await q;
+    if (error) throw error;
+    box.innerHTML = "";
+    if (!data.length) { box.innerHTML = '<div class="empty">এখনো কোনো নাম নেই। আপনিই প্রথম জমা দিন! 🚀</div>'; return; }
+    data.forEach(r => {
+      const el = buildItem({ text: r.name, meta: (GAME_LABEL[r.game] || "") + " • ♥ " + toBn(r.likes) });
+      const lk = document.createElement("button");
+      lk.className = "icon" + (liked.has(r.id) ? " on" : ""); lk.textContent = "👍"; lk.title = "পছন্দ";
+      lk.addEventListener("click", async () => {
+        if (liked.has(r.id)) return toast("আগেই পছন্দ করেছেন");
+        liked.add(r.id); store.set("sng_liked", [...liked]); lk.classList.add("on");
+        try { await sb.rpc("like_submission", { p_id: r.id }); toast("ধন্যবাদ! 👍"); } catch {}
+      });
+      const rp = document.createElement("button");
+      rp.className = "icon"; rp.textContent = "⚑"; rp.title = "রিপোর্ট";
+      rp.addEventListener("click", async () => {
+        if (reported.has(r.id)) return toast("আগেই রিপোর্ট করেছেন");
+        if (!confirm("এই নামটি রিপোর্ট করবেন?")) return;
+        reported.add(r.id); store.set("sng_reported", [...reported]);
+        try { await sb.rpc("report_submission", { p_id: r.id }); toast("রিপোর্ট পাঠানো হয়েছে"); } catch {}
+      });
+      el.insertBefore(lk, el.children[1]); el.insertBefore(rp, el.children[2]);
+      box.appendChild(el);
+    });
+  } catch (e) { box.innerHTML = '<div class="empty">লোড করা যায়নি। পরে চেষ্টা করুন।</div>'; console.warn(e.message); }
+}
+$("#commFilter").addEventListener("change", loadCommunity);
+$("#commSort").addEventListener("change", loadCommunity);
+
+$("#subBtn").addEventListener("click", async () => {
+  if (!sb) return toast("কমিউনিটি এখন চালু নেই");
+  const name = $("#subName").value.trim();
+  const game = $("#subGame").value;
+  const len = Array.from(name).length;
+  if (len < 2 || len > 60) return toast("নাম ২ থেকে ৬০ অক্ষরের মধ্যে দিন");
+  if (/(https?:|www\.|\.com|\.net|\.org|t\.me|wa\.me|@)/i.test(name)) return toast("লিংক বা কন্টাক্ট দেওয়া যাবে না");
+  const last = store.get("sng_last_submit", 0);
+  if (Date.now() - last < 30000) return toast("কিছুক্ষণ পর আবার চেষ্টা করুন");
+  const btn = $("#subBtn"); btn.disabled = true;
+  try {
+    const { error } = await sb.from("name_submissions").insert({ name, game });
+    if (error) throw error;
+    store.set("sng_last_submit", Date.now());
+    $("#subName").value = "";
+    toast("জমা হয়েছে! অনুমোদনের পর দেখা যাবে ✓");
+  } catch (e) { toast("জমা দেওয়া যায়নি"); console.warn(e.message); }
+  btn.disabled = false;
+});
+
+/* ---------------- শুরু ---------------- */
+buildDecoChips();
+buildRandChips();
+updateFavCount();
+renderResults();
+loadPopular();
+</script>
+</body>
+</html>
